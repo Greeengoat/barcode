@@ -1,0 +1,114 @@
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        // $(document).ready(function() {            
+        //     window.location.hash = 'home';
+        //     $.mobile.initializePage();
+        // });
+        $(document).on("pagebeforeshow", "#display", function() {
+            $("table#allTable tbody").empty();
+            var data = localStorage.getItem("LocalData");
+            //console.log(data);
+            data = JSON.parse(data);
+            var vat = data[count][1];
+            var order = Meteor.call("sendCode",vat).items;
+            var html = "";
+            order.forEach(html = html + "<tr><td>" + item + "</td><td>" + quantity + "</td><td>" + price + "</td></tr>"
+                + "<input type="checkbox">";);
+            $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
+            /**
+            for(var count = 0; count < data.length; count++)
+            {
+                html = html + "<tr><td>" + data[count][0] + "</td><td><a href='javascript:openURL(\"" + data[count][1] + "\")'>" + data[count][1] + "</a></td></tr>";
+            }
+            $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
+            **/
+        });
+        function clear() 
+        {
+            var data = [];
+            data = JSON.stringify(data);
+            localStorage.setItem("LocalData", data);
+            alert("Cleared")
+        }
+        function scan()
+        {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    if(!result.cancelled)
+                    {
+                        navigator.notification.prompt("Please enter name of data",  function(input){
+                            var name = input.input1;
+                            var value = result.text;
+                            var data = localStorage.getItem("LocalData");
+                            //console.log(data);
+                            data = JSON.parse(data);
+                            data[data.length] = [name, value];
+                            localStorage.setItem("LocalData", JSON.stringify(data));
+                            alert("Done");
+                        });
+                        
+                    }
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+           );
+        }
+        function openURL(url)
+        {
+            window.open(url, '_blank', 'location=yes');
+        }
+        //initialize
+        if(localStorage.getItem("LocalData") == null)
+        {
+            var data = [];
+            data = JSON.stringify(data);
+            localStorage.setItem("LocalData", data);
+        }
+    </script>
+    <title>QRCode-Reader-App</title>
+</head>
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>Home</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <p>
+                <a href="javascript:scan();" style="text-decoration: none"><button>Scan</button></a>
+                <a target="_self" href="#display" style="text-decoration: none"><button>Display Food Items</button></a>
+                <a href="javascript:clear();" style="text-decoration: none"><button>Clear</button></a>
+            </p>
+        </div>
+    </div>
+
+    <div data-role="page" id="display">
+        <div data-role="header">
+            <a target="_self" href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Display</h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <table data-role="table" data-mode="column" id="allTable" class="ui-responsive table-stroke">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <a id="pay" style="text-decoration: none"><button>Pay</button></a>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/node',
+1 verbose cli   '/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'view',
+1 verbose cli   'cordova:org.apache.cordova.inappbrowser',
+1 verbose cli   'version' ]
+2 info using npm@3.10.8
+3 info using node@v4.6.0
+4 verbose stack Error: Unsupported URL Type: cordova:org.apache.cordova.inappbrowser
+4 verbose stack     at parseUrl (/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/npm-package-arg/npa.js:186:13)
+4 verbose stack     at npa (/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/npm-package-arg/npa.js:79:12)
+4 verbose stack     at EventEmitter.view (/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/lib/view.js:71:12)
+4 verbose stack     at Object.commandCache.(anonymous function) (/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/lib/npm.js:124:13)
+4 verbose stack     at EventEmitter.<anonymous> (/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/bin/npm-cli.js:73:30)
+4 verbose stack     at nextTickCallbackWith0Args (node.js:420:9)
+4 verbose stack     at process._tickCallback (node.js:349:13)
+5 verbose cwd /Users/Yang/Meteor/myApp
+6 error Darwin 16.0.0
+7 error argv "/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/node" "/Users/Yang/.meteor/packages/meteor-tool/.1.4.1_2.osco1w++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/bin/npm" "view" "cordova:org.apache.cordova.inappbrowser" "version"
+8 error node v4.6.0
+9 error npm  v3.10.8
+10 error Unsupported URL Type: cordova:org.apache.cordova.inappbrowser
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
